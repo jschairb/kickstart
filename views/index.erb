@@ -1,0 +1,13 @@
+<h1>Kick</h1>
+
+<% @projects.each do |project| %>
+  <h2><%= project.name %></h2>
+  <% project.environments.each do |environment| %>
+    <form action="/deploy" method="post">
+      <input type="hidden" name="project" value="<%= project.name %>" />
+      <input type="hidden" name="environment" value="<%= environment %>" />
+      <p><label><%= environment %></label><input type="submit" name="commit" value="Kick" /></p>
+    </form>
+  <% end %>
+<% end %>
+
