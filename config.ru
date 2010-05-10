@@ -3,10 +3,14 @@ require 'sinatra'
 
 root_dir = File.dirname(__FILE__)
 
-set :environment, :development
+require File.join(root_dir, "kickstart.rb")
+
 set :root,        root_dir
 set :app_file,    File.join(root_dir, 'kickstart.rb')
-disable :run
+set :run, false
+set :environment, :development
+set :views, File.join(root_dir, "views")
+set :public, File.join(root_dir, "public")
 
 FileUtils.mkdir_p 'log' unless File.exists?('log')
 log = File.new("log/sinatra.log", "a")
