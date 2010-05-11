@@ -10,6 +10,11 @@ require 'deployer'
 configure do
   APP_ROOT = File.expand_path(File.dirname(__FILE__))
   PROJECTS = YAML.load_file(File.join(APP_ROOT, "config", "projects.yml"))
+  CREDENTIALS = YAML.load_file(File.join(APP_ROOT, "config", "credentials.yml"))
+end
+
+use Rack::Auth::Basic do |username, password|
+  [username, password] == [CREDENTIALS['username'], CREDENTIALS['password']]
 end
 
 get '/' do
